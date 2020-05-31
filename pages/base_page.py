@@ -3,16 +3,31 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import SybSystemLocators
 
+"""Данный модуль необходим для описания класс базовой вебстраницы
+    от которого мы будем наследывать все остальные классы """
+
 
 class BasePage:
+    """Конструктор необходимый для инициализации очередного инстанса страницы
+        В него входи объект записанный в переменную broser который из себя представляет инстанс класса определнного
+         бразера управляемого специальным драйвером
+         Подробнее о том, как формируется инстанс данного класса в модуле conftest.py
+         URL указывается всегда
+        Так же сразу при инстанцировании нового объекта страницы применяется метод неявного ожидания
+        Нужен для стабилизации тестов. Подробнее про неявное ожидание в документации selenium"""
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    """Метод для открытия страницы"""
     def open(self):
         self.browser.get(self.url)
 
+    """Метод позволяющий проверить наличие элемента на странице
+        Принимает в качестве аргумента 2 переменные. Как искать и чем
+        (в тестах используются кортежи представляющие, из себя метод поиска элемента
+        и его селектор"""
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
@@ -20,6 +35,8 @@ class BasePage:
             return False
         return True
 
+    """Метод повзоляющий проверить ОТСУТСТВИЕ элемента на странице.
+        Использовать осмысленно, можно получать ложноположительные тесты"""
     def is_not_element_present(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
@@ -28,6 +45,7 @@ class BasePage:
 
         return False
 
+    """Метод проверяте что элемент был, но в какой-то моент исчес"""
     def is_disappeared(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException). \
@@ -38,8 +56,14 @@ class BasePage:
         return True
 
 
+"""В проекте для большинства сраниц существует смежное поведени для нескольких страниц  
+    для них сформирован промежуточный класс, чтобы изолировать их обощенное поведения от базового класса 
+    страниц"""
+
+
 class SubSystems(BasePage):
 
+    """Метод выхода из системы """
     def exit_system(self):
         try:
             self.is_element_present(*SybSystemLocators.EXIT_BUTTON_0)
@@ -51,6 +75,7 @@ class SubSystems(BasePage):
             exit_button = self.browser.find_element(*locator)
             exit_button.click()
 
+    """Метод для смены системы (Выход на страницу выбора системы)"""
     def change_subsystem(self):
         try:
             self.is_element_present(*SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON_0)
@@ -62,6 +87,7 @@ class SubSystems(BasePage):
             change_subsystem_button = self.browser.find_element(*locator)
             change_subsystem_button.click()
 
+    """Метод для открытия меню по управлению профилем"""
     def open_submenu(self):
         self.is_element_present(*SybSystemLocators.SUB_MENU)
         submenu = self.browser.find_element(*SybSystemLocators.SUB_MENU)

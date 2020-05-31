@@ -5,6 +5,9 @@ from pages.login_page import LoginPage
 from config import Credentials
 
 
+"""Моудль с тестами для страницы авторизации"""
+
+
 class TestLoginTest:
 
     def test_user_should_login(self, browser):

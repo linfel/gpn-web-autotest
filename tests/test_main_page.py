@@ -4,6 +4,8 @@ import scenarios
 from pages.main_page import MainPage
 from config import Credentials
 
+"""Моудль с тестами для основной страницы. (Выбор системы)"""
+
 
 class TestMainPage:
 
