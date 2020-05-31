@@ -40,19 +40,31 @@ class BasePage:
 
 class SubSystems(BasePage):
 
-    def exit(self):
-        self.is_element_present(*SybSystemLocators.EXIT_BUTTON)
-        exit_button = self.browser.find_element(*SybSystemLocators.EXIT_BUTTON)
-        exit_button.click()
+    def exit_system(self):
+        try:
+            self.is_element_present(*SybSystemLocators.EXIT_BUTTON_0)
+            locator = SybSystemLocators.EXIT_BUTTON_0
+        except NoSuchElementException:
+            self.is_element_present(*SybSystemLocators.EXIT_BUTTON_1)
+            locator = SybSystemLocators.EXIT_BUTTON_1
+        finally:
+            exit_button = self.browser.find_element(*locator)
+            exit_button.click()
 
     def change_subsystem(self):
-        self.is_element_present(*SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON)
-        change_subsystem_button = self.browser.find_element(*SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON)
-        change_subsystem_button.click()
+        try:
+            self.is_element_present(*SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON_0)
+            locator = SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON_0
+        except NoSuchElementException:
+            self.is_element_present(*SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON_1)
+            locator = SybSystemLocators.SUBSYSTEM_CHANGE_BUTTON_1
+        finally:
+            change_subsystem_button = self.browser.find_element(*locator)
+            change_subsystem_button.click()
 
     def open_submenu(self):
         self.is_element_present(*SybSystemLocators.SUB_MENU)
-        submenu = self.browser.find_element()
+        submenu = self.browser.find_element(*SybSystemLocators.SUB_MENU)
         submenu.click()
 
 

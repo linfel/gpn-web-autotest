@@ -18,6 +18,8 @@ class MainPageLocators:
 
 
 class SybSystemLocators:
-    SUB_MENU = (By.CSS_SELECTOR, '')
-    SUBSYSTEM_CHANGE_BUTTON = (By.CSS_SELECTOR, '')
-    EXIT_BUTTON = (By.CSS_SELECTOR, '')
+    SUB_MENU = (By.CSS_SELECTOR, 'app-profile-block > div > button.mat-icon-button')
+    SUBSYSTEM_CHANGE_BUTTON_0 = (By.CSS_SELECTOR, '#cdk-overlay-0 > div > div > div > div :nth-child(2)')
+    SUBSYSTEM_CHANGE_BUTTON_1 = (By.CSS_SELECTOR, '#cdk-overlay-1 > div > div > div > div :nth-child(2)')
+    EXIT_BUTTON_0 = (By.CSS_SELECTOR, '#cdk-overlay-0 > div > div > div > div :nth-child(4)')
+    EXIT_BUTTON_1 = (By.CSS_SELECTOR, '#cdk-overlay-1 > div > div > div > div :nth-child(4)')
