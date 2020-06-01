@@ -1,0 +1,4 @@
+tests/
+pages/
+__pycache__/
+.idea/
