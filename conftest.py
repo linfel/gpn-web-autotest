@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+
 """Данный модуль предназначен для хранения и описания фикстур для выполнения тестов 
     Фикстуры инстанцируют обект браузера с заданными параметрами"""
 
