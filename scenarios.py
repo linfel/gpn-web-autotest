@@ -16,6 +16,12 @@ def login_scenario(browser):
     login_page.should_login()
 
 
+def subsystem_scenario(browser, subsystem):
+    login_scenario(browser)
+    main_page = MainPage(browser, browser.current_url)
+    main_page.should_go_to_subsystem(subsystem)
+
+
 def marketing_scenario(browser):
     login_scenario(browser)
     main_page = MainPage(browser, browser.current_url)

@@ -1,6 +1,4 @@
-import pytest
-
-from pages.base_page import BasePage
+import allure
 from pages.login_page import LoginPage
 from config import Credentials
 
@@ -10,6 +8,7 @@ from config import Credentials
 
 class TestLoginTest:
 
+    @allure.step("Тест1. Авторзицация")
     def test_user_should_login(self, browser):
         login_page = LoginPage(browser, Credentials.LOGIN_URL)
         login_page.open()
