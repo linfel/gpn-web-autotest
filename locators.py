@@ -1,5 +1,9 @@
 from selenium.webdriver.common.by import By
 
+"""Моудль содержащий в себе классы локаторов страниц
+    Локатор предсатвлен в виде переменной указывающей webdriver 
+     как интерпертировать указанный селектор, а так же само значение селектора"""
+
 
 class LoginPageLocators:
     LOGIN_INPUT = (By.CSS_SELECTOR, '[placeholder="Логин"]')

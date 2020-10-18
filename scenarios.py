@@ -2,11 +2,24 @@ from pages.login_page import LoginPage
 from config import Credentials
 from pages.main_page import MainPage
 
+"""Модуль с функциями содержащими наиболее используемые сценарии, такие как 
+    Авторизация / Переход к необходимой системе. 
+    Написаны сокращения дублирования кода """
+
+
+# TODO Обсудить, может описать переход к подсистеме черз 1 метод с передачей аргумента?
+
 
 def login_scenario(browser):
     login_page = LoginPage(browser, Credentials.LOGIN_URL)
     login_page.open()
     login_page.should_login()
+
+
+def subsystem_scenario(browser, subsystem):
+    login_scenario(browser)
+    main_page = MainPage(browser, browser.current_url)
+    main_page.should_go_to_subsystem(subsystem)
 
 
 def marketing_scenario(browser):
